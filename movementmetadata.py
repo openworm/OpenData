@@ -6,14 +6,6 @@ from PyOpenWorm.dataObject import (DataObject,
                                    Alias)
 
 
-class MovementMetadata(DataObject):
-    usage = ObjectProperty(value_type=Usage)
-    provenance = ObjectProperty(value_type=Provenance)
-    collection = ObjectProperty(value_type=Collection)
-    biodetails = ObjectProperty(value_type=BioDetails)
-    software = ObjectProperty(value_type=Software)
-
-
 class Usage(DataObject):
     rights = DatatypeProperty()
 
@@ -38,7 +30,7 @@ class Collection(DataObject):
     scope = DatatypeProperty()
     limitations = DatatypeProperty()
     interpolation = DatatypeProperty()
-    
+
 
 class BioDetails(DataObject):
     sex = DatatypeProperty()
@@ -51,9 +43,9 @@ class BioDetails(DataObject):
     allele = DatatypeProperty()
     proteins = DatatypeProperty()
     daysofadulthood = DatatypeProperty()
-    worm_id = DatatypeProperty() #what is this
+    worm_id = DatatypeProperty()
 
-class Software
+class Software(DataObject):
     name = DatatypeProperty()
     featureID = DatatypeProperty()
     version = DatatypeProperty()
@@ -64,6 +56,15 @@ class Software
     nosegskel = DatatypeProperty()
     base_name = DatatypeProperty() #what is base_name - need to check this
     ventralside = DatatypeProperty()
+    
+class MovementMetadata(DataObject):
+    usage = ObjectProperty(value_type=Usage)
+    provenance = ObjectProperty(value_type=Provenance)
+    collection = ObjectProperty(value_type=Collection)
+    biodetails = ObjectProperty(value_type=BioDetails)
+    software = ObjectProperty(value_type=Software)
+
+
 
 
 __yarom_mapped_classes__ = (MovementMetadata, Usage, Provenance, Collection, BioDetails, Software)
