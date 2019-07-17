@@ -55,16 +55,20 @@ def upload_movemementmetadata(namespace):
                         protocol=yamldict["protocol"],  # will need to add more detail to this
                         scope= None,  # need to get this - maybe abstract
                         limitations= None,  # need to find this
-                        interpolation=None)  # need to find this
+                        interpolation=None,
+                        arena = yamldict["arena"])  # need to find this
     b = ctx(BioDetails)(sex = yamldict["sex"],
                         stage = yamldict["stage"],
                         age = yamldict["age"],
                         strain = yamldict["strain"],
                         strain_descr = yamldict["strain_description"],
-                        genes = yamldict["gene"],
+                        gene = yamldict["gene"],
                         chromosome = yamldict["chromosome"],
                         allele = yamldict["allele"],
-                        proteins = yamldict["protein"])
+                        proteins = yamldict["protein"],
+                        daysofadulthood = yamldict["days_of_adulthood"],
+                        worm_id = yamldict["worm_id"])
+
     s = ctx(Software)(name = yamldict["software"],
                       featureID = yamldict["featureID"],
                       version = yamldict["version"],
@@ -72,7 +76,9 @@ def upload_movemementmetadata(namespace):
                       time = yamldict["total time (s)"],
                       framespersecond = yamldict["frames per second"],
                       mmperpixel = yamldict["video micrometers per pixel"],
-                      nosegskel = yamldict["number of segmented skeletons"])
+                      nosegskel = yamldict["number of segmented skeletons"],
+                      base_name = yamldict["base_name"],
+                      ventralside = yamldict["ventral_side"])
     md.subject(w)
     md.collection(c)
     md.usage(u)
@@ -87,3 +93,5 @@ def upload_movemementmetadata(namespace):
 
     # Link to the namespace context -- our statements will not be saved otherwise
     namespace.context.add_import(ctx)
+
+
