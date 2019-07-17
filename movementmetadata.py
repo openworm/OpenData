@@ -38,6 +38,7 @@ class Collection(DataObject):
     scope = DatatypeProperty()
     limitations = DatatypeProperty()
     interpolation = DatatypeProperty()
+    arena = DatatypeProperty()
 
 class BioDetails(DataObject):
     sex = DatatypeProperty()
@@ -45,10 +46,12 @@ class BioDetails(DataObject):
     age = DatatypeProperty()
     strain = DatatypeProperty()
     strain_descr = DatatypeProperty()
-    genes = DatatypeProperty()
+    gene = DatatypeProperty()
     chromosome = DatatypeProperty()
     allele = DatatypeProperty()
     proteins = DatatypeProperty()
+    daysofadulthood = DatatypeProperty()
+    worm_id = DatatypeProperty() #what is this
 
 class Software
     name = DatatypeProperty()
@@ -59,6 +62,8 @@ class Software
     framespersecond = DatatypeProperty()
     mmperpixel = DatatypeProperty()
     nosegskel = DatatypeProperty()
+    base_name = DatatypeProperty() #what is base_name - need to check this
+    ventralside = DatatypeProperty()
 
 
 __yarom_mapped_classes__ = (MovementMetadata, Usage, Provenance, Collection, BioDetails, Software)
