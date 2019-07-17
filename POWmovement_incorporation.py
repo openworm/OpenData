@@ -8,11 +8,11 @@ recs = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix
 import yaml
 import zipfile
 
-zip_file = zipfile.ZipFile("D:/exporty12.zip")
+zip_file = zipfile.ZipFile("D:/exporty13.zip")
 files = zip_file.namelist()
 lenfiles = len(files)
 #for now just one record
-for i in range(1):
+for i in range(lenfiles):
     with zip_file.open(files[i]) as yamlfile:
         yamldict = yaml.safe_load(yamlfile)
         doi = yamldict["identifier"]
