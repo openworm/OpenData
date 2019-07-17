@@ -55,8 +55,7 @@ def upload_movemementmetadata(namespace):
                         protocol=yamldict["protocol"],  # will need to add more detail to this
                         scope= None,  # need to get this - maybe abstract
                         limitations= None,  # need to find this
-                        interpolation=None,
-                        arena = yamldict["arena"])  # need to find this
+                        interpolation=None)  # need to find this
     b = ctx(BioDetails)(sex = yamldict["sex"],
                         stage = yamldict["stage"],
                         age = yamldict["age"],

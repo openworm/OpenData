@@ -38,7 +38,7 @@ class Collection(DataObject):
     scope = DatatypeProperty()
     limitations = DatatypeProperty()
     interpolation = DatatypeProperty()
-    arena = DatatypeProperty()
+    
 
 class BioDetails(DataObject):
     sex = DatatypeProperty()
