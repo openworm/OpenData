@@ -21,7 +21,7 @@ def pow_data(namespace):
 
     sickle = Sickle("https://zenodo.org/oai2d")
     recs = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix='oai_dc')
-    zip_file = zipfile.ZipFile("C:/Users/estho/PycharmProjects/GSOC3/movementmetadata_yaml4.zip")
+    zip_file = zipfile.ZipFile("https://github.com/EST09/AccessibleData/blob/master/movementmetadata_yaml4.zip")
     files = zip_file.namelist()
     lenfiles = len(files)
     # for now just one record
