@@ -8,6 +8,12 @@ from movementmetadata import Provenance, Usage, Collection, BioDetails, Software
 import yaml
 import zipfile
 from urllib.request import urlopen
+import io
+from io import StringIO, BytesIO
+import requests, zipfile, io
+# r = requests.get(zip_file_url)
+# z = zipfile.ZipFile(io.BytesIO(r.content))
+# z.extractall()
 
 
 
@@ -23,11 +29,11 @@ def pow_data(namespace):
 
     sickle = Sickle("https://zenodo.org/oai2d")
     recs = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix='oai_dc')
-    zip_file = zipfile.ZipFile(urlopen("https://github.com/EST09/AccessibleData/raw/master/movementmetadata_yaml4.zip"))
+    r2 = requests.get("https://github.com/EST09/AccessibleData/raw/master/movementmetadata_yaml4.zip")
+    zip_file = zipfile.ZipFile(io.BytesIO(r2.content))
     files = zip_file.namelist()
     lenfiles = len(files)
-    # for now just one record
-    for i in range(5000):
+    for i in range(lenfiles):
         with zip_file.open(files[i]) as yamlfile:
             yamldict = yaml.safe_load(yamlfile)
             doi = yamldict["identifier"]
@@ -117,5 +123,3 @@ def pow_data(namespace):
 
             # Link to the namespace context -- our statements will not be saved otherwise
             namespace.context.add_import(ctx)
-
-
