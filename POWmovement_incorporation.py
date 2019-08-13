@@ -7,6 +7,8 @@ from movementmetadata import MovementMetadata
 from movementmetadata import Provenance, Usage, Collection, BioDetails, Software
 import yaml
 import zipfile
+from urllib.request import urlopen
+
 
 
 # what should namespace be? upload_movementmetadata(yamldict, xmlrec)?
@@ -21,7 +23,7 @@ def pow_data(namespace):
 
     sickle = Sickle("https://zenodo.org/oai2d")
     recs = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix='oai_dc')
-    zip_file = zipfile.ZipFile("https://github.com/EST09/AccessibleData/raw/master/movementmetadata_yaml4.zip")
+    zip_file = zipfile.ZipFile(urlopen("https://github.com/EST09/AccessibleData/raw/master/movementmetadata_yaml4.zip"))
     files = zip_file.namelist()
     lenfiles = len(files)
     # for now just one record
