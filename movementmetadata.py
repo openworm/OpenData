@@ -17,12 +17,15 @@ class Provenance(DataObject):
     previewlink = DatatypeProperty()
 
 class Collection(DataObject):
-    lab = DatatypeProperty()
+    lab_name = DatatypeProperty()
+    lab_location = DatatypeProperty()
     collector = DatatypeProperty()
     timestamp = DatatypeProperty()
     humidity = DatatypeProperty()
     temperature = DatatypeProperty()
-    arena = DatatypeProperty()
+    arena_style = DatatypeProperty()
+    arena_size = DatatypeProperty()
+    arena_orientation = DatatypeProperty()
     food = DatatypeProperty()
     habituation = DatatypeProperty()
     media = DatatypeProperty()
@@ -46,7 +49,9 @@ class BioDetails(DataObject):
     worm_id = DatatypeProperty()
 
 class Software(DataObject):
-    name = DatatypeProperty()
+    software_name = DatatypeProperty()
+    software_version = DatatypeProperty()
+    software_featureID = DatatypeProperty()
     featureID = DatatypeProperty()
     version = DatatypeProperty()
     settings = DatatypeProperty()
@@ -56,13 +61,14 @@ class Software(DataObject):
     nosegskel = DatatypeProperty()
     base_name = DatatypeProperty() #what is base_name - need to check this
     ventralside = DatatypeProperty()
-    
+
 class MovementMetadata(DataObject):
     usage = ObjectProperty(value_type=Usage)
     provenance = ObjectProperty(value_type=Provenance)
     collection = ObjectProperty(value_type=Collection)
     biodetails = ObjectProperty(value_type=BioDetails)
     software = ObjectProperty(value_type=Software)
+    subject = ObjectProperty(value_type=Worm)
 
 
 
