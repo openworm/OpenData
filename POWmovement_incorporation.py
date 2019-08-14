@@ -42,6 +42,7 @@ def pow_data(namespace):
             arena = yamldict["arena"]
             lab = yamldict["lab"]
             software = yamldict["software"]
+            print(i)
             # xmlrec = sickle.GetRecord(identifier='oai:zenodo.org:{}'.format(wantedsplit), metadataPrefix='oai_dc')
 
             ctx = namespace.new_context('http://openworm.org/data/movement/{}'.format(doi))
