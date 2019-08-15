@@ -33,7 +33,7 @@ def pow_data(namespace):
     zip_file = zipfile.ZipFile(io.BytesIO(r2.content))
     files = zip_file.namelist()
     lenfiles = len(files)
-    for i in range(lenfiles):
+    for i in range(5000):
         with zip_file.open(files[i]) as yamlfile:
             yamldict = yaml.safe_load(yamlfile)
             doi = yamldict["identifier"]
