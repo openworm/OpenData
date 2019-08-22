@@ -1,4 +1,3 @@
-
 import sys
 import matplotlib.pyplot as plt
 import zipfile
@@ -20,7 +19,7 @@ def main():
             y = d.replace("/", "_")
             y = y.replace(".", "_")
             c = r.raw.encode("utf8")
-            img_name = "yamlfile_{}.yaml".format(y)
+            img_name = "xmlfile_{}.xml".format(y)
             print("  Writing image {:s} in the archive".format(img_name))
             zf.writestr(img_name, c)
 
@@ -29,4 +28,3 @@ if __name__ == "__main__":
     print("Python {:s} on {:s}\n".format(sys.version, sys.platform))
     main()
     print("Done.")
-
