@@ -107,12 +107,46 @@ for r in recs:
 
 A full walk through of how PyOpenWorm can be installed and movement metadata incorporated is provided [here](movement/IntegratingMovementMetadata.ipynb) in the google colab virtual environment. 
 
-Data is uploaded into PyOpenWorm in the form of classes. These classes must first be created and saved to the PyOpenWorm code base before any data can be uploaded in the required format. Further documentation regarding adding data to PyOpenWorm can be found here. 
+Data is uploaded into PyOpenWorm in the form of classes. These classes must first be created and saved to the PyOpenWorm code base before any data can be uploaded in the required format. Further documentation regarding adding data to PyOpenWorm can be found [here](https://pyopenworm.readthedocs.io/en/latest/adding_data.html). 
 
-This script was used to create classes. Information was uploaded under the main class MovementMetadata which was in turn split into subclasses: Usage, Provenance, Collection, BioDetails and Software. In a separate script, I could then upload the information in the form of these classes creating a new context for each record, referenced by the doi each time. 
+[This script](https://raw.githubusercontent.com/openworm/OpenData/master/movement/movementmetadata.py) was used to create classes. Information was uploaded under the main class MovementMetadata which was in turn split into subclasses: Usage, Provenance, Collection, BioDetails and Software. In a separate [script](https://raw.githubusercontent.com/openworm/OpenData/master/movement/POWmovement_incorporation.py), I could then upload the information in the form of these classes creating a new context for each record, referenced by the doi each time. 
 
-These were then saved, committed and pushed to PyOpenWorm using the pow command. The pow command is specific to PyOpenWorm and provides a high level interface for working with PyOpenWorm managed data. 
+These were then saved, committed and pushed to PyOpenWorm using the pow command. The [pow command](https://pyopenworm.readthedocs.io/en/stable/command.html) is specific to PyOpenWorm and provides a high level interface for working with PyOpenWorm managed data. 
 
 This ensures future users of PyOpenWorm are now able to access the movement metadata. 
+
+#### 5. Testing Integration
+
+To check that all metadata was uploaded completely and correctly, unit tests were written. These can be run each time movement metadata information is accessed and ensure that the metadata being accessed is still as expected. 
+
+This script (still in progress) was written to check the data. Key checks include questioning if numerically all records have been uploaded, checking responses are returned in a reasonable amount of time and incorporating spot checks of 3 random records to ensure the information returned is correct. 
+
+The script will follow the format of previously incorporated tests: [DataIntegrityTest](https://raw.githubusercontent.com/openworm/PyOpenWorm/dev/tests/DataIntegrityTest.py) and [EvidenceQualityTest](https://raw.githubusercontent.com/openworm/PyOpenWorm/dev/tests/EvidenceQualityTest.py).
+
+#### 6. Adding Missing Metadata
+
+As can be seen in Document 1 to conform fully to the FAIR principles additional metadata needs to be harvested. The key categories missing include:
+
+- Full description of the protocol
+- Full description of the scope of the project
+- Full description of the limitations of the project
+- The addition of GO terms and taxon ID
+- Ensuring a version number is linked to each data record
+- Ensuring there is a reference to a RDF/DublinCite format of the metadata
+
+Whilst a dictionary can be created for GO terms and Taxon ID (either by searching and replacing from website automatically or by changing manually), to include the full protocol, scope, description and limitations of record it will likely be important to scrape information from the abstract and the materials and methods section for the publication associated with each record which can be accessed via its associated doi. 
+
+Next steps: 
+
+1. Finish uploading metadata
+2. Understand how to ensure that the contents that were uploaded with `pow save` can be reincorporated back into the main distribution of PyOpenWorm
+3. Commit the necessary changes to personal github fork
+4. Write tests 
+5 Upload missing metadata possibly by scraping abstracts and protocols of associated publications 
+6. Upload actual data in a format which is useful to Data Science competitions
+7. Pull request the changes back to the master PyOpenWorm repo
+8. Work with maintainers to get the PR approved
+
+
 
 
