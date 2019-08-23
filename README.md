@@ -67,4 +67,52 @@ Each record in records is in .xml format with the headers: OAI Identifier, Dates
 
 The information stored within description is in yaml format. We are able to save the entire xml file using this [script](https://raw.githubusercontent.com/openworm/OpenData/master/movement/zipped_xml_folder_creation.py). This zipped folder of xml files can be accessed by running the script. However, as we are most interested in the information stored under Description, I have also created a zipped folder of yaml files using this [script](https://raw.githubusercontent.com/openworm/OpenData/master/movement/zipped_yaml_folder_creation.py) and accessible [here](movement/zipped_yaml_folder.zip). 
 
+#### 3. Creating a standard yaml format
+
+As not every record contained the same data and headings, it was necessary to modify each yaml record into a standard format. This [script](https://raw.githubusercontent.com/openworm/OpenData/master/movement/standardised_yaml_key_creation.py) finds the categories which are not common to all records and the script [linked above](https://raw.githubusercontent.com/openworm/OpenData/master/movement/zipped_yaml_folder_creation.py) adds them in the format, “category: None” as required to ensure all yaml records contain the same set of categories. [Document 1](movement/MovementMetadataCategories.xlsx) specifies the categories which were incorporated. Likewise, any headers which contain missing information designated by -N/A- are modified to store “None” as their value instead. Characters which cause difficulty in reading yaml files were also replaced for ease of processing. In addition, an identifier in the form of a doi was added to each yaml file and then inserted into the filename.
+
+```
+for r in recs:
+   a = r.metadata["description"]
+   d = r.metadata["identifier"][1]
+   y = d.replace("/", "_")
+   y = y.replace(".", "_")
+   e = "\nidentifier: "
+   var3 = e + d
+   a = [s[1:] for s in a]
+   a = [w.replace('@', '') for w in a]
+   a = [w.replace('DA609: npr-1(ad609)X.', 'DA609 npr1(ad609)X.') for w in a]
+   a = [w.replace('AX994: daf-22(m130)II; npr-1(ad609)X.', 'AX994 daf22(m130)II npr1(ad609)X.') for w in a]
+   a = [w.replace('N2: lab reference strain.', 'N2 lab reference strain.') for w in a]
+   a = [w.replace('AX994: daf-22(m130)II.', 'AX994 daf22(m130)II.') for w in a]
+   a = [w.replace('OMG2: mIs12[myo-2p::GFP]II; npr-1(ad609)X. OMG19: rmIs349[myo3p::RFP]; npr-1(ad609)X.', 'OMG2 mIs12[myo2pGFP]II npr1(ad609)X. OMG19 rmIs349[myo3pRFP] npr1(ad609)X.') for w in a]
+   a = [w.replace('OMG10: mIs12[myo-2p::GFP]II. OMG24: rmIs349[myo3p::RFP].', 'OMG10 mIs12[myo2pGFP]II. OMG24 rmIs349[myo3pRFP].') for w in a]
+   a = [w.replace('-N/A-','None') for w in a]
+   a = [w.replace('\n\t', '\n') for w in a]
+   a = [w.replace('\n\n', '\n') for w in a]
+   a = [w.replace('\t', '  ') for w in a]
+   b = a[0]
+   included_standard_elements = sorted([element for element in standardised_list if (element in b)])
+   unincluded_standard_elements = list(set(standardised_list).difference(included_standard_elements))
+   for i in unincluded_standard_elements:
+       addel = "\n{}".format(i) + " : None"
+       b = b + addel
+   g = b.split('\n', 1)[1]
+   c = var3 + g
+   img_name = "yamlfile_{}.yaml".format(y)
+   print("  Writing image {:s} in the archive".format(img_name))
+   zf.writestr(img_name, c)
+```
+#### 4. Uploading data into PyOpenWorm
+
+A full walk through of how PyOpenWorm can be installed and movement metadata incorporated is provided [here](movement/IntegratingMovementMetadata.ipynb) in the google colab virtual environment. 
+
+Data is uploaded into PyOpenWorm in the form of classes. These classes must first be created and saved to the PyOpenWorm code base before any data can be uploaded in the required format. Further documentation regarding adding data to PyOpenWorm can be found here. 
+
+This script was used to create classes. Information was uploaded under the main class MovementMetadata which was in turn split into subclasses: Usage, Provenance, Collection, BioDetails and Software. In a separate script, I could then upload the information in the form of these classes creating a new context for each record, referenced by the doi each time. 
+
+These were then saved, committed and pushed to PyOpenWorm using the pow command. The pow command is specific to PyOpenWorm and provides a high level interface for working with PyOpenWorm managed data. 
+
+This ensures future users of PyOpenWorm are now able to access the movement metadata. 
+
 
