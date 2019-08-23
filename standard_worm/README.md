@@ -16,7 +16,7 @@ Individual stacks were visualised in Fiji (Fiji Is Just ImageJ). Stacks were imp
 
 ![](/figures/Figure_importstack.png)
 
-3. Straightening
+#### 3. Straightening
   
 Although each stack contained only a single worm these worms were often in curved or random orientations making comparison between worms harder. To make identification of neurons and transformation easier the worms were first straightened using Fiji’s Straighten option. 
 
