@@ -159,7 +159,7 @@ Having created categories for movement metadata which conform to the FAIR princi
 
 #### 1. Gathering Data sources
 
-OSF, like Zenodo, provides a platform for data sharing and includes key datasets concerning neuronal activity in C. elegans. I decided to split datasets into two divisions: Dynamical - calcium imaging with the head free to move and Fixed - where the worms are sedated.
+OSF, like Zenodo, provides a platform for data sharing and includes key datasets concerning neuronal activity in *C. elegans*. I decided to split datasets into two divisions: Dynamical - calcium imaging with the head free to move and Fixed - where the worms are sedated.
 
 Key non-dynamical/fixed data sources include:
 
@@ -187,7 +187,7 @@ To integrate dynamical neuronal activity, an extension to the FAIR categories fo
 
 ### Background
 
-This year, 2019, researchers finally completed the whole animal connectome of both C. elegans sexes. This will improve modelling of the nervous system whilst more detailed neuronal architecture may increase our understanding of the function of neurons within circuits. However, whilst the connectivity was mapped, no atlas of neuronal 3D coordinates currently exists. Previous attempts to build a 3D atlas have successfully segmented, identified and mapped 357/558 nuclei in the L1 stage. Using DAPI and RFP stained confocal Z stacks, this project attempted to apply the principles set out in Long et al. to produce a reference atlas of the 3D neuronal coordinates to which C. elegans phenotypes could be quickly and easily compared. Key steps include: straightening worms, marking nuclei centroids, aligning the z stacks and transforming the coordinate space. With advent of NeuroPal, a multicolour transgene able to resolve unique neuron identities, the creation of a more robust atlas should become easier. 
+This year, 2019, researchers finally completed the whole animal connectome of both *C. elegans* sexes. This will improve modelling of the nervous system whilst more detailed neuronal architecture may increase our understanding of the function of neurons within circuits. However, whilst the connectivity was mapped, no atlas of neuronal 3D coordinates currently exists. Previous attempts to build a 3D atlas have successfully segmented, identified and mapped 357/558 nuclei in the L1 stage. Using DAPI and RFP stained confocal Z stacks, this project attempted to apply the principles set out in Long et al. to produce a reference atlas of the 3D neuronal coordinates to which *C. elegans* phenotypes could be quickly and easily compared. Key steps include: straightening worms, marking nuclei centroids, aligning the z stacks and transforming the coordinate space. With advent of NeuroPal, a multicolour transgene able to resolve unique neuron identities, the creation of a more robust atlas should become easier. 
 
 ### Methods
 
@@ -260,6 +260,37 @@ Open excel and save a blank worksheet as a .csv file.
 Within the space under the *New_ tab* copy and paste this [script](https://raw.githubusercontent.com/openworm/OpenData/master/standard_worm/bigwarpstacktransform_credit_johnbogovicj.groovy). Set *Language->groovy*.  Press Run and fill in the boxes in the pop up window. 
 
 ![](figures/Figure_runscript.png)
+
+Under landmark file, select the .csv file which you used to store the landmark coordinates from BigWarp. Create a copy of the .csv file you earlier created from the ROI (yellow dots) xyz locations for the moving image. Delete all columns other than X, Y and Slice and delete the header row. Use this newly formatted file for input points. For output points select the blank .csv file that you just created. Press OK.
+
+Open the previously blank .csv file. This should now have 3 columns. The first corresponding to the transformed X coordinates of your ROIs, the second corresponding to the transformed Y coordinates of your ROI and the third a column of zeros. Replace the column of zeros with the Slice column from your original ROI file.   
+
+These are your transformed worm coordinates which can then be plotted using this script. 
+
+However, there are major flaws with this approach. Worms do not lie flat along the Z plane and so will need to be straightened along the Z axis. Current suggestions include identifying the four landmark points as the first visualisation of the head/tail and last visualisation of the  head/tail through the image stack and applying a transform. Another issue is the reliability of centroid marking. This was done manually and may not lead to the correct centroid identification. The key issue, however, is that there no easy/obvious fiducial marker was identified to anchor worm stacks to each other. Currently, alignment is heavily reliant on being able to identify patterns of nuclei shared between worms.
+
+Possible Fiducial Markers discussed for finding corresponding slices between stacks were:
+
+1. Pharynx/other internal structures: unlikely to be useful in this as not fixed.
+2. Vulva/Excretory Pore: may be more useful but not visible right now in current images (excretory pore is visible).
+3. Discussed the use of myo-3:GFP as in [Myers paper](https://www.nature.com/articles/nmeth.1366.pdf). Peter Sun, in Scott Emmons Lab, has created images with different fluorescence identifying different types of cells. Scott raised the point that the inside of the worm will be more squishy than outside. 
+4. Right now looking along the lines of being able to identify similar patterns in nuclei to align stacks: to aid in this future images will reduce the number of nuclei by switching from DAPI to less sensitive RFP.
+5. No start or end point of worm stack/slices per stack seem to be more different than would be expected. This is an issue for identifying an accurate cuticle and an accurate cuticle might be a nice fiducial marker.
+
+## Conclusions and current state
+
+### Movement Metadata
+
+All 15 000 records are in the correct format to be uploaded to PyOpenWorm. The metadata still currently needs to be integrated fully and tests still need to be written. Missing metadata will need to be harvested and added to each record. In addition, a link to the movement data itself will be added. 
+
+### Calcium Imaging
+
+More data sources need to be collated and added to a centralised storage site, following the example set for movement metadata. It may be worth creating a metadata record in WCON for each dataset? The FAIR categories currently decided will need to be made robust to the addition of more datasets. Once completed however, the integration with PyOpenWorm should follow the same principle as the integration of Movement Metadata. 
+
+### Standard Worm
+
+Multiple confocal Z stacks have now been collected of 1 day old *C. elegans*. Currently, I am manually marking the xyz position of the centroid of each individual fluorescence which is believed to correspond to a somatic or neuronal nuclei. To increase standardisation and reduce the reliance on the human annotator, it would be good to find the centroid of each fluorescence automatically. Whilst worms have been straightened along the xy coordinate space, currently worms do not lie flat along the z plane. Straightening of the worm along the z dimension will need to be performed. Currently, there is no way to align confocal Z stacks slices to slices in other Z stacks. This makes it difficult to identify corresponding nuclei between stacks. Either a fiducial marker will need to be incorporated to act as an anchor between stacks or patterns of nuclei will need to be identified manually or via machine learning in 3D plots. The variability in annotation of the centroid increases the difficulty of identifying patterns of nuclei and so far manual identification has been unsuccessful.  
+
 
 
 
