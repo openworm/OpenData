@@ -26,7 +26,7 @@ Once the movement data had been processed to ensure conformability with the FAIR
 
 The integration of movement metadata into PyOpenWorm had six main phases as seen below.
 
-![Alt text](OpenData/figures/Figure_ FAIRPrinciples.jpg?raw=true "Optional Title")
+![](/figures/Figure_%20FAIRPrinciples.jpg?raw=true)
 
 
 First, following the FAIR framework, a set of categories were determined. These categories were decided to ensure the recommendations of the FAIR principles were followed whilst keeping the data as easily accessible as possible. These were greatly informed by the guidance already set out in WCON. Second, the metadata surrounding each movement record in Zenodo was harvested whilst still in its current format. Third, the data harvested was changed to a standardised format, with missing categories added and set to “None” to ensure uniformity across records. Fourth, the standardised metadata could now be integrated into the PyOpenWorm codebase following the instructions in the documentation. Fifth, after integration unit tests are performed to check that data has been added completely and correctly. Sixth, any FAIR categories not filled by the existing metadata are filled through additional searches. 
