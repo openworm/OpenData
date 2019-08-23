@@ -235,6 +235,34 @@ The next step is to save these points for further use. Pressing *Ctrl + M* (or a
 
 ![](figures/Figure_loadcentroidstack.png)
 
+#### 5. Transformation to the same coordinate space
+
+However some worms may be bigger than others or in a different coordinate space. To solve this problem to subsequently compare the ROIs selected in each worm to decide which are stable and which may be unstable. To do this we used a plugin called BigWarp which uses an affine transform to transform one worm into the space of another. An affine transform preserves points, straight lines and planes and keeps parallel lines parallel. 
+
+BigWarp cannot deal with stacks so we define the coordinate space using two corresponding slices. Currently, we do not know which slice corresponds to another slice in a corresponding stack. For the sake of testing the script, I compared slice 13 of one RFP stack which I designated the reference to slice 13 of all other DAPI stacks. 
+   
+Open the corresponding slices from each image through *File -> Open* and then open them both in BigWarp: *Plugins -> BigDataViewer -> BigWarp*. Specify which image will be your target/reference image and which will be your moving image (i.e. the image you transform). With both images on the screen, click on the moving image to make it active, press *F8* and select *Affine* in the pop up window then close the pop up image. Press the space bar to enter landmark mode.
+
+![](figures/Figure_bigwarp.png)
+
+Select a point on the moving image and then select the corresponding point on the target image. Ensure that you are considering dorso-ventral and anterior-posterior orientation. Worms are not necessarily imaged in the same orientation. The excretory pore is a good marker for identifying dorso-ventral orientation. These are your landmark points. Continue with this until all your landmark points are selected. 
+
+![](figures/Figure_bigwarplandmarks.png)
+
+Save the landmark file as a .csv file: *File -> Export landmarks*
+
+Close all windows except for the orignal Fiji Toolbar. Press the [ key on your keyboard to open up a script interpreter
+
+![](figures/Figure_scriptinterpreter.png)
+
+Open excel and save a blank worksheet as a .csv file.
+
+Within the space under the *New_ tab* copy and paste this [script](https://raw.githubusercontent.com/openworm/OpenData/master/standard_worm/bigwarpstacktransform_credit_johnbogovicj.groovy). Set *Language->groovy*.  Press Run and fill in the boxes in the pop up window. 
+
+![](figures/Figure_runscript.png)
+
+
+
 
 
 
