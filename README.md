@@ -1,7 +1,7 @@
 # OpenData
 Repo for Google Summer of Code Open Data Project 2019.
 
-Full documentation can be found [here](https://docs.google.com/document/d/17awS_bMScEyuUEsp_qPCEQG0esEeP5r0JWIU0xgLfJU/edit?usp=sharing)
+For a google docs version of this ReadMe see [here](https://docs.google.com/document/d/17awS_bMScEyuUEsp_qPCEQG0esEeP5r0JWIU0xgLfJU/edit?usp=sharing)
 
 # Introduction
 
