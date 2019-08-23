@@ -175,13 +175,69 @@ Whilst these sources are currently sufficient to start planning integration cate
 
 To integrate dynamical neuronal activity, an extension to the FAIR categories for movement metadata was decided as shown in [Document 2](calcium_imaging/CalciumImagingMetadataCategories.xlsx). These categories will need to be made more robust by evaluating more publications. 
 
-####Next steps: 
+#### Next steps: 
 
 1. Gather more data sources and collate in a central location
 2. Increase the robustness of the FAIR categories for integration into PyOpenWorm (possibly extend WCON documentation too)
 3. Harvest metadata (possibly via paper scraping from key words)
 4. Write classes and integrate
 5. Write tests for integration 
+
+## Standard Worm
+
+### Background
+
+This year, 2019, researchers finally completed the whole animal connectome of both C. elegans sexes. This will improve modelling of the nervous system whilst more detailed neuronal architecture may increase our understanding of the function of neurons within circuits. However, whilst the connectivity was mapped, no atlas of neuronal 3D coordinates currently exists. Previous attempts to build a 3D atlas have successfully segmented, identified and mapped 357/558 nuclei in the L1 stage. Using DAPI and RFP stained confocal Z stacks, this project attempted to apply the principles set out in Long et al. to produce a reference atlas of the 3D neuronal coordinates to which C. elegans phenotypes could be quickly and easily compared. Key steps include: straightening worms, marking nuclei centroids, aligning the z stacks and transforming the coordinate space. With advent of NeuroPal, a multicolour transgene able to resolve unique neuron identities, the creation of a more robust atlas should become easier. 
+
+### Methods
+
+#### 1. Imaging
+
+Specimens were one day old *C. elegans*. Using a DAPI stain, which attaches to AT rich regions of DNA, nuclei were visualised and the worm captured as a confocal stack. 
+
+#### 2. Visualisation
+
+Individual stacks were visualised in Fiji (Fiji Is Just ImageJ). Stacks were imported through *File -> Import -> Image Sequence* and then the first image of the stack was selected. Settings were left on default. 
+
+![](figures/Figure_importstack.png)
+
+3. Straightening
+  
+Although each stack contained only a single worm these worms were often in curved or random orientations making comparison between worms harder. To make identification of neurons and transformation easier the worms were first straightened using Fiji’s Straighten option. 
+
+Once the stack was loaded, we scrolled through the stack until a central slice was chosen which showed the width and length of the worm’s body clearly. If no such slice exists the contrast can be adjusted using *Image -> Adjust -> Brightness/Contrast*. To reset the Brightness/Contrast settings to the original press *Auto*. 
+
+Once the worm body is visible select the polygon symbol on the Fiji tool panel and draw along the length of the worm following its curves by creating sections of straight lines. Connect the final point to the first.
+
+![](figures/Figure_polygonspline.png)
+
+To create a line rather than polygon: *Edit -> Selection -> Area to Line*. To create a smoother centre line: *Edit -> Selection ->  Fit Spline*. 
+
+You now have a spline mimicking the worms centre. Fiji’s Straightening tool uses this to perform straightening via spline interpolation. The Straighten tool creates another finely spaced spline (1 pixel width) from your spline (ROI). You are asked to assign a width to the spline (ROI) you drew, generally enough to cover the width of the *C. elegans*. Then for each small spline segment it interpolates, using a line perpendicular to that segment which is the width of the original ROI and is centred on the spline, from the original image to the final result. This creates a straightened worm. 
+
+![](figures/Figure_straightenedworm.png)
+
+#### 4. Marking Neurons
+
+Nuclei were marked manually as the centroid of a spot of DAPI fluorescence. To do this each section of the worm was considered in turn and spots which were the brightest throughout the stack for the same xy coordinates were considered the centroid. Only somatic/neuronal nuclei were marked. Nuclei within the gonad and embryonic region were left unmarked as these would not remain stable between worms. For example, everything in blue would be left unmarked in the figure below.
+
+![](figures/Figure_gonalregion.png)
+
+To accomplish the marking of neurons, we used the multipoint selection and zoomed in on each section. If neurons were difficult to visualise the contrast of the image could again be adjusted and reset as before: *Image -> Adjust -> Brightness/Contrast*
+
+![](figures/Figure_markingcentroid.png)
+
+This eventually led to a stack of points (ROIs) representing the centre of each somatic/neuronal nuclei.  
+
+![](figures/Figure_centroidstack.png)
+
+The next step is to save these points for further use. Pressing *Ctrl + M* (or alternatively *Analyse -> Measure*) allows you to save each yellow point’s x, y, z coordinates to a csv, alongside other information such as Area, Min and Max etc. To load the ROIs at a later date onto the image stack, they must also be saved as a .roi file through *File -> Save As -> Selection*. To load the .roi file at any time: first import the image stack (*File -> Import -> Image Sequence*, select the first image in the sequence), then load the .roi file through the ROI manager.  *Analyse -> Tools -> ROI manager*. Once the box appears select *More*, then *Open* and then select the .roi file which you want to load. 
+
+![](figures/Figure_loadcentroidstack.png)
+
+
+
+
 
 
 
