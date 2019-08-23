@@ -1,5 +1,5 @@
 # OpenData
-Repo for Google Summer of Code Open Data Project 2019
+Repo for Google Summer of Code Open Data Project 2019.
 Full documentation can be found [here](https://docs.google.com/document/d/17awS_bMScEyuUEsp_qPCEQG0esEeP5r0JWIU0xgLfJU/edit?usp=sharing)
 
 # Introduction
@@ -24,4 +24,9 @@ Once the movement data had been processed to ensure conformability with the FAIR
 
 ### Methods
 
-The integration of movement metadata into PyOpenWorm had six main phases as seen in Figure 1. First, following the FAIR framework, a set of categories were determined. These categories were decided to ensure the recommendations of the FAIR principles were followed whilst keeping the data as easily accessible as possible. These were greatly informed by the guidance already set out in WCON. Second, the metadata surrounding each movement record in Zenodo was harvested whilst still in its current format. Third, the data harvested was changed to a standardised format, with missing categories added and set to “None” to ensure uniformity across records. Fourth, the standardised metadata could now be integrated into the PyOpenWorm codebase following the instructions in the documentation. Fifth, after integration unit tests are performed to check that data has been added completely and correctly. Sixth, any FAIR categories not filled by the existing metadata are filled through additional searches. 
+The integration of movement metadata into PyOpenWorm had six main phases as seen below.
+
+![Alt text](figures/Figure_ FAIRPrinciples.jpg?raw=true "Optional Title")
+
+
+First, following the FAIR framework, a set of categories were determined. These categories were decided to ensure the recommendations of the FAIR principles were followed whilst keeping the data as easily accessible as possible. These were greatly informed by the guidance already set out in WCON. Second, the metadata surrounding each movement record in Zenodo was harvested whilst still in its current format. Third, the data harvested was changed to a standardised format, with missing categories added and set to “None” to ensure uniformity across records. Fourth, the standardised metadata could now be integrated into the PyOpenWorm codebase following the instructions in the documentation. Fifth, after integration unit tests are performed to check that data has been added completely and correctly. Sixth, any FAIR categories not filled by the existing metadata are filled through additional searches. 
