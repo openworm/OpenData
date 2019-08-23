@@ -61,5 +61,8 @@ sickle = Sickle("https://zenodo.org/oai2d")
 records = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix='oai_dc')
 
 ```
+Each record in records is in .xml format with the headers: OAI Identifier, Datestamp, setSpec, Author or Creator, Date, Description, Resource Identifier, Relation, Rights Management, Title, Resource Type.
+
+![](figures/Figure_Zenodorecordxml.png)
 
 
