@@ -39,11 +39,27 @@ Movement data and metadata is stored in Zenodo within the Community [“Open Wor
 
 [Document 1](movement/MovementMetadataCategories.xlsx) shows the categories decided to implement the FAIR principles for each record.  
 
+#### 2. Harvesting Metadata
 
+Zenodo already provides interoperability for all its records with the [Open Archives Initiatives](https://www.openarchives.org/pmh/), a protocol developed for metadata harvesting. Going back to the main Open Worm Movement Database Community page and clicking the link “OAI-PMH Interface” under “Harvesting API” on the right hand side allows us to access the metadata in the OAI format.
 
-Harvesting Metadata
+![](figures/Figure_Zenodorecordslist.png?raw=true)
 
-Zenodo already provides interoperability for all its records with the Open Archives Initiatives, a protocol developed for metadata harvesting. Going back to the main Open Worm Movement Database Community page and clicking the link “OAI-PMH Interface” under “Harvesting API” on the right hand side allows us to access the metadata in the OAI format.
+In this [format](https://zenodo.org/oai2d?verb=ListRecords&set=user-open-worm-movement-database&metadataPrefix=oai_dc) we can use a premade OAI-PMH Metadata harvester, to cycle through each of the links using the token at the end of each page and harvest the metadata surrounding each record. I chose to use the prebuilt python package, [Sickle](https://pypi.org/project/Sickle/). 
 
+Using Sickle we are able to access and extract data as needed from the “Open Worm Movement Database” Community.
+
+```
+import sickle
+from sickle import Sickle
+from sickle.iterator import OAIResponseIterator
+
+#access Zenodo
+sickle = Sickle("https://zenodo.org/oai2d")
+
+#create object which contains all Zenodo records within the community "Open Worm Movement Database"
+records = sickle.ListRecords(set='user-open-worm-movement-database', metadataPrefix='oai_dc')
+
+```
 
 
