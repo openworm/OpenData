@@ -20,11 +20,11 @@ Key dynamical data sources include:
 
 - Data collated by [Andrew Leifer](https://www.pnas.org/content/113/8/E1074)
 
-Whilst these sources are currently sufficient to start planning integration categories which conform to the FAIR principles, ultimately more sources of data, especially dynamical, will be required. Using [Octoparse](https://www.octoparse.com/), web scraping of publications citing the Leifer dataset was carried out but was largely [unsuccessful](calcium_imaging/Citing doi.org_10.1073_pnas1507110112 and include _elegans_.xlsx] at returning new datasets of interest. 
+Whilst these sources are currently sufficient to start planning integration categories which conform to the FAIR principles, ultimately more sources of data, especially dynamical, will be required. Using [Octoparse](https://www.octoparse.com/), web scraping of publications citing the Leifer dataset was carried out but was largely [unsuccessful](Citing doi.org_10.1073_pnas1507110112 and include _elegans_.xlsx] at returning new datasets of interest. 
 
 #### 2. Establishing FAIR categories
 
-To integrate dynamical neuronal activity, an extension to the FAIR categories for movement metadata was decided as shown in [Document 2](calcium_imaging/CalciumImagingMetadataCategories.xlsx). These categories will need to be made more robust by evaluating more publications. 
+To integrate dynamical neuronal activity, an extension to the FAIR categories for movement metadata was decided as shown in [Document 2](CalciumImagingMetadataCategories.xlsx). These categories will need to be made more robust by evaluating more publications. 
 
 #### Next steps: 
 
