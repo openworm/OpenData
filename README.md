@@ -136,7 +136,7 @@ As can be seen in Document 1 to conform fully to the FAIR principles additional 
 
 Whilst a dictionary can be created for GO terms and Taxon ID (either by searching and replacing from website automatically or by changing manually), to include the full protocol, scope, description and limitations of record it will likely be important to scrape information from the abstract and the materials and methods section for the publication associated with each record which can be accessed via its associated doi. 
 
-Next steps: 
+#### Next steps: 
 
 1. Finish uploading metadata
 2. Understand how to ensure that the contents that were uploaded with `pow save` can be reincorporated back into the main distribution of PyOpenWorm
